@@ -9,37 +9,22 @@ jobs:
 
   build:
     docker:
-      - image: ubuntu:20.04  # Specify the base image for the job
+      - image: docker:20.10  # Use Docker image that already has Docker pre-installed
     steps:
       - checkout
-      - run:
-          name: Install Docker
-          command: |
-            export DEBIAN_FRONTEND=noninteractive
-            apt update
-            apt install apt-transport-https ca-certificates curl software-properties-common sudo -y  # Install sudo
-            curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-            echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list >/dev/null
-            apt update
-            apt install docker-ce docker-ce-cli containerd.io -y
-            docker --version  # Verify Docker installation
-
-            # Start Docker daemon
-            service docker start || systemctl start docker
-            service docker  enable || systemctl enable docker # Enable Docker daemon
-
-            # Verify Docker daemon is running
-            docker info
-
       - run:
           name: Set up Docker Buildx
           command: |
             docker buildx create --use
 
       - run:
-          name: Build and push Docker image
+          name: Login to Docker Hub
           command: |
             echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+
+      - run:
+          name: Build and push Docker image
+          command: |
             docker build -t $DOCKER_REGISTRY/$DOCKER_USERNAME/$DOCKER_IMAGE:$CIRCLE_SHA1 .
             docker push $DOCKER_REGISTRY/$DOCKER_USERNAME/$DOCKER_IMAGE:$CIRCLE_SHA1
 
