@@ -1,0 +1,37 @@
+{
+  "name": "apexdata-docker",
+  "version": "1.1.1",
+  "description": "ApexData: Scalable DaaS with Docker, JSON storage, seamless queries, and modern app integration.",
+  "main": "docker.js",
+  "scripts": {
+    "test": "test",
+    "build": "tsc",
+    "start": "nodemon ./build/config/docker.js",
+    "dev": "ts-node ./src/config/docker.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git"
+  },
+  "keywords": [
+    "Docker Images",
+    "Docker Containers",
+    "Docker Compose",
+    "Docker Swarm",
+    "Docker Stacks",
+    "Docker Services",
+    "Docker Networks",
+    "Docker Volumes"
+  ],
+  "author": "Ankan Saha",
+  "license": "MIT",
+  "dependencies": {
+    "fastify": "^5.1.0",
+    "nodemon": "^3.1.7",
+    "pm2": "^5.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.1",
+    "ts-node": "^10.9.2"
+  }
+}
