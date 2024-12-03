@@ -1,15 +1,9 @@
 version: 2.1
 
-executors:
-  docker-executor:
-    docker:
-      - image: docker:20.10.7  # Specify Docker image (you can change this to any version you prefer)
-    working_directory: ~/repo
-
 jobs:
   checkout:
     docker:
-      - image: docker:20.10.7
+      - image: ubuntu # Specify the base image for the job
     steps:
       - checkout  # Checkout the code from the repository
 
