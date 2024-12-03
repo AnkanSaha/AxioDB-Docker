@@ -3,32 +3,35 @@ version: 2.1
 jobs:
   checkout:
     docker:
-      - image: ubuntu # Specify the base image for the job
+      - image: ubuntu:20.04  # Specify the base image for the job
     steps:
       - checkout  # Checkout the code from the repository
 
   build:
     docker:
-      - image: ubuntu # Specify the base image for the job
+      - image: ubuntu:20.04  # Specify the base image for the job
     steps:
       - checkout
       - run:
           name: Install Docker
           command: |
+            export DEBIAN_FRONTEND=noninteractive
             apt update
             apt install apt-transport-https ca-certificates curl software-properties-common -y
-            curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg 
+            curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
             echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
             apt update
             apt install docker-ce docker-ce-cli containerd.io -y
             usermod -aG docker $USER
             systemctl enable docker
             systemctl start docker
+            docker --version  # Verify Docker installation
 
       - run:
           name: Set up Docker Buildx
           command: |
             docker buildx create --use
+
       - run:
           name: Build and push Docker image
           command: |
