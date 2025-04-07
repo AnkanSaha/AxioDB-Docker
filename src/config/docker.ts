@@ -1,4 +1,5 @@
 import Fastify from 'fastify';
+import ServerInfo from './Info';
 
 // Create a Fastify instance
 const fastify = Fastify({
@@ -7,11 +8,23 @@ const fastify = Fastify({
 
 const PORT: number = Number(process.env.PORT) || 27018;
 
-// Define a simple route
-fastify.get('/', async (request, reply) => {
-  return { message: 'Welcome to the Fastify Server!' };
+// Define a simple important route
+fastify.get('/', async (_request: any, _reply: any) => {
+  return { message: 'Hello, from AxioDB Docker Container' };
 });
 
+fastify.get('/health', async (_request: any, _reply: any) => {
+  return { status: 'OK' };
+});
+fastify.get('/status', async (_request: any, _reply: any) => {
+  return { status: `Running on port ${PORT}` };
+});
+
+// Define a route to get the version information
+fastify.get('/info', async(_request: any, _reply:any)=> {
+  const { DB_Info, OS_Info, Runtime_Info } = await ServerInfo();
+  return { DB_Info, OS_Info, Runtime_Info };
+})
 // Start the server
 const start = async () => {
   try {
