@@ -1,5 +1,5 @@
 import Fastify from 'fastify';
-import { readFile } from 'node:fs/promises';
+import ServerInfo from './Info';
 
 // Create a Fastify instance
 const fastify = Fastify({
@@ -22,18 +22,8 @@ fastify.get('/status', async (_request: any, _reply: any) => {
 
 // Define a route to get the version information
 fastify.get('/info', async(_request: any, _reply:any)=> {
-  // Read the version from the version file
-  const versionData = await readFile("package.json", "utf-8");
-  const versionJson = JSON.parse(versionData);
-  const DB_Info = {
-    AxioDB_Version: versionJson.dependencies["axiodb"],
-    AxioDB_Docker_Version: versionJson.version,
-    Author: versionJson.author,
-    WebServer: "Fastify",
-    License: versionJson.license,
-    Latest_Update: versionJson.Published,
-  }
-  return DB_Info;
+  const { DB_Info, OS_Info, Runtime_Info } = await ServerInfo();
+  return { DB_Info, OS_Info, Runtime_Info };
 })
 // Start the server
 const start = async () => {
