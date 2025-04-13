@@ -3,12 +3,11 @@ version: 2.1
 jobs:
   build_and_push:
     docker:
-      - image: cimg/base:stable  # Use CircleCI base image that supports Docker
+      - image: cimg/base:stable  # CircleCI's base image with Docker support
     steps:
       - checkout
 
-      - setup_remote_docker:
-          version: 20.10.18  # Or latest supported version
+      - setup_remote_docker  # Use default Docker version (currently Docker 24.0.6)
 
       - run:
           name: Login to Docker Hub
