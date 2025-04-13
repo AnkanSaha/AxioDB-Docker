@@ -33,6 +33,5 @@ export default async ()=> {
         WebServer: "Fastify",
         WebServer_Version: versionJson.dependencies.fastify,
     }
-
     return { DB_Info, OS_Info, Runtime_Info };
 }
