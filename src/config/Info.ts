@@ -30,7 +30,6 @@ export default async ()=> {
         OpenSSL_Version: process.versions.openssl,
         Zlib_Version: process.versions.zlib,
         Libuv_Version: process.versions.libuv,
-        WebServer: "Fastify",
         WebServer_Version: versionJson.dependencies.fastify,
     }
     return { DB_Info, OS_Info, Runtime_Info };
