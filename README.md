@@ -12,7 +12,7 @@ AxioDB Docker is designed to extend the capabilities of AxioDB, enabling seamles
 
 ## 🛠️ Quick Start
 
-```bash
+````bash
 # Pull the image
 docker pull theankansaha/axiodb:latest
 
@@ -41,7 +41,7 @@ docker run -d --name axiodb -p 2025:2025 -v axiodb-data:/data axiodb/axiodb:late
 git clone https://github.com/AnkanSaha/axiodb-docker.git
 cd axiodb-docker
 docker build -t axiodb/axiodb:latest .
-```
+````
 
 ## 🤝 Contributing
 
