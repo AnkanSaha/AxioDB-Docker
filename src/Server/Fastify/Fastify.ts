@@ -6,7 +6,11 @@ import Collection from "axiodb/lib/Operation/Collection/collection.operation";
 import Database from "axiodb/lib/Operation/Database/database.operation";
 
 // Interface
-interface ServerOptions { CentralAuthCollection: Collection, CentralDB: Database, CentralDBInstance: AxioDB }
+interface ServerOptions {
+  CentralAuthCollection: Collection;
+  CentralDB: Database;
+  CentralDBInstance: AxioDB;
+}
 
 // Start the server
 const start = async (options?: ServerOptions) => {

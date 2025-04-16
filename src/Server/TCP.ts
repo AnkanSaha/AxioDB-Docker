@@ -7,8 +7,11 @@ import { AxioDB } from "axiodb";
 const PORT: number = Number(ServerPorts.TCP) || 27018;
 
 // Interface
-interface ServerOptions { CentralAuthCollection: Collection, CentralDB: Database, CentralDBInstance: AxioDB }
-
+interface ServerOptions {
+  CentralAuthCollection: Collection;
+  CentralDB: Database;
+  CentralDBInstance: AxioDB;
+}
 
 const tcpServer = async (options?: ServerOptions) => {
   const server = net.createServer((socket) => {

@@ -20,6 +20,6 @@ module.exports = {
       log_date_format: "YYYY-MM-DD HH:mm:ss",
       combine_logs: true,
       merge_logs: true,
-    }
+    },
   ],
 };
