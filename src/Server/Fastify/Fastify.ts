@@ -1,42 +1,40 @@
 import Fastify from "fastify";
 import ServerInfo from "../../config/Info";
-import { FastifyInformation, Port } from "../../config/Keys";
-
-// Import AxioDB for Storing the Fastify Server Related Information & Authentication
+import { ServerPorts } from "../../config/Keys";
 import { AxioDB } from "axiodb";
+import Collection from "axiodb/lib/Operation/Collection/collection.operation";
+import Database from "axiodb/lib/Operation/Database/database.operation";
 
-// Create a Fastify instance
-const fastify = Fastify({
-  logger: true, // Enable logging
-});
+// Interface
+interface ServerOptions { CentralAuthCollection: Collection, CentralDB: Database, CentralDBInstance: AxioDB }
 
-// Create an instance of AxioDB for storing Fastify server information & User authentication Details
-const fastifyAxioDB = new AxioDB(
-  FastifyInformation.CentralDB_Name,
-  FastifyInformation.Custompath,
-);
-
-const PORT: number = Number(Port.HTTP) || 27018;
-
-// Define a simple important route
-fastify.get("/", async (_request: any, _reply: any) => {
-  return { message: "Hello, from AxioDB Docker Container" };
-});
-
-fastify.get("/health", async (_request: any, _reply: any) => {
-  return { status: "OK" };
-});
-fastify.get("/status", async (_request: any, _reply: any) => {
-  return { status: `Running on port ${PORT}` };
-});
-
-// Define a route to get the version information
-fastify.get("/info", async (_request: any, _reply: any) => {
-  const { DB_Info, OS_Info, Runtime_Info } = await ServerInfo();
-  return { DB_Info, OS_Info, Runtime_Info };
-});
 // Start the server
-const start = async () => {
+const start = async (options?: ServerOptions) => {
+  // Create a Fastify instance
+  const fastify = Fastify({
+    logger: true, // Enable logging
+  });
+
+  const PORT: number = Number(ServerPorts.HTTP) || 27018;
+
+  // Define a simple important route
+  fastify.get("/", async (_request: any, _reply: any) => {
+    return { message: "Hello, from AxioDB Docker Container" };
+  });
+
+  fastify.get("/health", async (_request: any, _reply: any) => {
+    return { status: "OK" };
+  });
+  fastify.get("/status", async (_request: any, _reply: any) => {
+    return { status: `Running on port ${PORT}` };
+  });
+
+  // Define a route to get the version information
+  fastify.get("/info", async (_request: any, _reply: any) => {
+    const { DB_Info, OS_Info, Runtime_Info } = await ServerInfo();
+    return { DB_Info, OS_Info, Runtime_Info };
+  });
+
   try {
     await fastify.listen({ port: PORT, host: "0.0.0.0" });
     console.log(`Server is running at http://localhost:${PORT}`);
