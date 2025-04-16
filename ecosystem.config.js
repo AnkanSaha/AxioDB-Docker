@@ -30,6 +30,6 @@ module.exports = {
       stop_exit_codes: [0], // Gracefully stop for these exit codes
       // Prevent Docker from exiting when process restarts
       no_daemon: true,
-    }
+    },
   ],
 };
