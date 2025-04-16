@@ -23,5 +23,4 @@ const main = async () => {
         CentralDBInstance: centralAxioDBInstance,
     });
 };
-
 main();
