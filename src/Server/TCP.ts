@@ -6,16 +6,16 @@ const PORT: number = Number(Port.TCP) || 27018;
 const server = net.createServer((socket) => {
     console.log('Client connected');
 
-    socket.on('data', (data) => {
-        console.log('Received from client:', data.toString());
-        socket.write(`Echo: ${data}`);
+    socket.on('data', (Command: string) => {
+        console.log('Received from client:', Command.toString());
+        socket.write(`Echo: ${Command}`);
     });
 
     socket.on('end', () => {
         console.log('Client disconnected');
     });
 
-    socket.on('error', (err) => {
+    socket.on('error', (err: Error) => {
         console.error('Socket Error:', err.message);
     });
 });
