@@ -1,7 +1,7 @@
 {
   "name": "apexdata-docker",
-  "version": "1.1.1",
-  "Published": "7th April 2025",
+  "version": "1.1.6",
+  "Published": "16th April 2025",
   "description": "ApexData: Scalable DaaS with Docker, JSON storage, seamless queries, and modern app integration.",
   "main": "docker.js",
   "scripts": {
@@ -27,7 +27,7 @@
   "author": "Ankan Saha",
   "license": "MIT",
   "dependencies": {
-    "axiodb": "^1.7.2",
+    "axiodb": "^1.7.10",
     "fastify": "^5.1.0",
     "nodemon": "^3.1.7",
     "pm2": "^5.4.3"
