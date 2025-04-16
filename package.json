@@ -1,7 +1,7 @@
 {
   "name": "apexdata-docker",
-  "version": "1.1.1",
-  "Published": "7th April 2025",
+  "version": "1.1.6",
+  "Published": "16th April 2025",
   "description": "ApexData: Scalable DaaS with Docker, JSON storage, seamless queries, and modern app integration.",
   "main": "docker.js",
   "scripts": {
