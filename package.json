@@ -7,7 +7,13 @@
   "scripts": {
     "test": "test",
     "build": "tsc",
-    "start": "nodemon ./build/config/docker.js",
+    "start": "pm2 start ./ecosystem.config.js",
+    "stop": "pm2 stop ./ecosystem.config.js",
+    "restart": "pm2 restart ./ecosystem.config.js",
+    "delete": "pm2 delete ./ecosystem.config.js",
+    "logs:all": "pm2 logs",
+    "logs:docker": "pm2 logs docker",
+    "logs": "pm2 logs ./ecosystem.config.js",
     "dev": "ts-node ./src/config/docker.ts"
   },
   "repository": {
@@ -27,7 +33,7 @@
   "author": "Ankan Saha",
   "license": "MIT",
   "dependencies": {
-    "axiodb": "^1.7.10",
+    "axiodb": "^2.7.11",
     "fastify": "^5.1.0",
     "nodemon": "^3.1.7",
     "pm2": "^5.4.3"
