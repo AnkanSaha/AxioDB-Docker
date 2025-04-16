@@ -4,10 +4,12 @@ import { Port, TCPInformation } from "../config/Keys";
 const PORT: number = Number(Port.TCP) || 27018;
 
 // Import AxioDB for Storing the Fastify Server Related Information & Authentication
-import { AxioDB } from 'axiodb';
+import { AxioDB } from "axiodb";
 
-
-const tcpAxioDB = new AxioDB(TCPInformation.CentralDB_Name, TCPInformation.Custompath);
+const tcpAxioDB = new AxioDB(
+  TCPInformation.CentralDB_Name,
+  TCPInformation.Custompath,
+);
 
 const server = net.createServer((socket) => {
   console.log("Client connected");
