@@ -27,7 +27,7 @@
   "author": "Ankan Saha",
   "license": "MIT",
   "dependencies": {
-    "axiodb": "^1.7.2",
+    "axiodb": "^1.7.10",
     "fastify": "^5.1.0",
     "nodemon": "^3.1.7",
     "pm2": "^5.4.3"

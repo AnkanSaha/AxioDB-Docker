@@ -1,5 +1,5 @@
 // Import all Servers
-import start from "../Server/Fastify";
+import start from "../Server/Fastify/Fastify";
 import tcpServer from "../Server/TCP";
 
 

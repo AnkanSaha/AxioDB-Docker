@@ -1,11 +1,17 @@
 import Fastify from 'fastify';
-import ServerInfo from '../config/Info';
-import { Port } from '../config/Keys';
+import ServerInfo from '../../config/Info';
+import { FastifyInformation, Port } from '../../config/Keys';
+
+// Import AxioDB for Storing the Fastify Server Related Information & Authentication
+import { AxioDB } from 'axiodb';
 
 // Create a Fastify instance
 const fastify = Fastify({
   logger: true, // Enable logging
 });
+
+// Create an instance of AxioDB for storing Fastify server information & User authentication Details
+const fastifyAxioDB = new AxioDB(FastifyInformation.CentralDB_Name, FastifyInformation.Custompath);
 
 const PORT: number = Number(Port.HTTP) || 27018;
 
