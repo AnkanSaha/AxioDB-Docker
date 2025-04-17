@@ -14,8 +14,6 @@ interface ServerOptions {
 }
 
 const GRPC_SERVER = async (options?: ServerOptions) => {
-
-    console.log(__dirname)
     // Define the path to your proto file
     const PROTO_PATH = path.resolve(__dirname, 'Protos/service.proto');
 
