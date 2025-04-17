@@ -1,4 +1,5 @@
 import { createSocket } from "dgram";
+import {ServerPorts} from "../config/Keys";
 
 export const udpServer = () => {
   const server = createSocket("udp4");
@@ -24,7 +25,7 @@ export const udpServer = () => {
     server.close();
   });
 
-  server.bind(41234, () => {
-    console.log("UDP Server listening on port 41234");
+  server.bind(ServerPorts.UDP, () => {
+    console.log(`UDP Server listening on port ${ServerPorts.UDP}`);
   });
 };

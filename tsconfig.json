@@ -13,9 +13,18 @@
     "esModuleInterop": true,
     "skipLibCheck": true, // Skip type checking of declaration files from dependencies
     "forceConsistentCasingInFileNames": true,
-    "lib": ["ES6", "DOM"], // Include the necessary TypeScript library declarations
+    "lib": [
+      "ES6",
+      "DOM"
+    ], // Include the necessary TypeScript library declarations
     "rootDir": "./src" // Specify the root directory for your source code
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx"], // Include TypeScript and TSX files
-  "exclude": ["node_modules"]
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.proto"
+  ], // Include TypeScript, TSX, and Proto files
+  "exclude": [
+    "node_modules"
+  ]
 }

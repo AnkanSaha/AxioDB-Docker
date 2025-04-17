@@ -1,6 +1,7 @@
 // Import all Servers
 import restStart from "../Server/Fastify/Fastify";
 import tcpServer from "../Server/TCP";
+import GRPC_SERVER from "../Server/GRPC/GRPC";
 
 // Import AxioDB for Storing the Fastify Server Related Information & Authentication
 import { AxioDB } from "axiodb";
@@ -26,6 +27,12 @@ const main = async () => {
     CentralDBInstance: centralAxioDBInstance,
   });
   tcpServer({
+    CentralAuthCollection: centralAuthCollection,
+    CentralDB: centralDB,
+    CentralDBInstance: centralAxioDBInstance,
+  });
+
+  GRPC_SERVER({
     CentralAuthCollection: centralAuthCollection,
     CentralDB: centralDB,
     CentralDBInstance: centralAxioDBInstance,

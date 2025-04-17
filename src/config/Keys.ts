@@ -5,6 +5,7 @@ export enum ServerPorts {
   TCP = 27019,
   GRPC = 27020,
   WEBSOCKET = 27021,
+  UDP = 27022,
 }
 
 export const CentralInformation = {
