@@ -5,6 +5,9 @@ import { AxioDB } from "axiodb";
 import Collection from "axiodb/lib/Operation/Collection/collection.operation";
 import Database from "axiodb/lib/Operation/Database/database.operation";
 
+// Import all Routes
+import MainServiceRoutes from "./Router/Router";
+
 // Interface
 interface ServerOptions {
   CentralAuthCollection: Collection;
@@ -20,6 +23,12 @@ const start = async (options?: ServerOptions) => {
   });
 
   const PORT: number = Number(ServerPorts.HTTP) || 27018;
+
+  // Register routes with a prefix
+  fastify.register(MainServiceRoutes, {
+    prefix: "/services",
+    DBInstances: options,
+  });
 
   // Define a simple important route
   fastify.get("/", async (_request: any, _reply: any) => {

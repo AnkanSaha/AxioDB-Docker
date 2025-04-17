@@ -13,8 +13,8 @@ RUN npm install
 # Copy the rest of the application source code
 COPY . .
 
-# Install TypeScript and PM2 and ts-node globally
-RUN npm install -g typescript pm2 ts-node
+# Install TypeScript and ts-node globally
+RUN npm install -g typescript ts-node
 
 
 # Compile TypeScript to JavaScript
