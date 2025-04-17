@@ -2,7 +2,7 @@
   "name": "axiodb-docker",
   "version": "1.3.8",
   "Published": "17th April 2025",
-  "description": "AxioDB: Scalable DaaS with Docker, JSON storage, seamless queries, and modern app integration.",
+  "description": "AxioDB Docker is designed to extend the capabilities of AxioDB, enabling seamless integration with other programming languages and systems via REST APIs, TCP connections, WebSocket, and more. This Docker image provides a scalable and efficient way to deploy AxioDB as a service.",
   "main": "docker.js",
   "scripts": {
     "test": "test",
@@ -41,5 +41,9 @@
   "devDependencies": {
     "@types/node": "^22.10.1",
     "ts-node": "^10.9.2"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
   }
 }
