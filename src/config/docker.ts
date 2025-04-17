@@ -28,14 +28,14 @@ const main = async () => {
   Console.green("Central Auth Collection Created");
 
   /// Start All Servers ========================== X ==========================
-  
+
   // Start Fastify Server
   restStart({
     CentralAuthCollection: centralAuthCollection,
     CentralDB: centralDB,
     CentralDBInstance: centralAxioDBInstance,
   });
-  
+
   // Start TCP Server
   tcpServer({
     CentralAuthCollection: centralAuthCollection,
@@ -44,12 +44,12 @@ const main = async () => {
   });
 
   // Start GRPC Server
-GRPC_SERVER({
+  GRPC_SERVER({
     CentralAuthCollection: centralAuthCollection,
     CentralDB: centralDB,
     CentralDBInstance: centralAxioDBInstance,
   });
-  
+
   // Start UDP Server
   udpServer({
     CentralAuthCollection: centralAuthCollection,

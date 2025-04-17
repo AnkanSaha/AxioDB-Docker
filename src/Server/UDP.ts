@@ -1,5 +1,5 @@
 import { createSocket } from "dgram";
-import {ServerPorts} from "../config/Keys";
+import { ServerPorts } from "../config/Keys";
 import Collection from "axiodb/lib/Operation/Collection/collection.operation";
 import Database from "axiodb/lib/Operation/Database/database.operation";
 import { AxioDB } from "axiodb";
@@ -9,7 +9,6 @@ interface ServerOptions {
   CentralDB: Database;
   CentralDBInstance: AxioDB;
 }
-
 
 export const udpServer = (options?: ServerOptions) => {
   const server = createSocket("udp4");
