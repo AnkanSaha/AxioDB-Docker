@@ -56,5 +56,6 @@ const main = async () => {
     CentralDB: centralDB,
     CentralDBInstance: centralAxioDBInstance,
   });
+
 };
-main();
+main(); // Start the main function
