@@ -1,9 +1,9 @@
-import { compare, hash } from "bcrypt";
+import { compare, hash, genSalt } from "bcryptjs";
 
 export default class bcrypt {
   // Method to hash password
   public static async hashPassword(password: string): Promise<string> {
-    const saltRounds = 10;
+    const saltRounds = await genSalt(10);
     const hashedPassword = await hash(password, saltRounds);
     return hashedPassword;
   }
