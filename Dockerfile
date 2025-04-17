@@ -14,9 +14,7 @@ RUN npm install
 COPY . .
 
 # Install TypeScript and PM2 and ts-node globally
-RUN npm install -g typescript pm2
-RUN npm i -g ts-node
-
+RUN npm install -g typescript pm2 ts-node
 
 
 # Compile TypeScript to JavaScript
