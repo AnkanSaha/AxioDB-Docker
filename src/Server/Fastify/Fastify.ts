@@ -25,7 +25,10 @@ const start = async (options?: ServerOptions) => {
   const PORT: number = Number(ServerPorts.HTTP) || 27018;
 
   // Register routes with a prefix
-  fastify.register(MainServiceRoutes, { prefix: '/services', DBInstances: options });
+  fastify.register(MainServiceRoutes, {
+    prefix: "/services",
+    DBInstances: options,
+  });
 
   // Define a simple important route
   fastify.get("/", async (_request: any, _reply: any) => {
