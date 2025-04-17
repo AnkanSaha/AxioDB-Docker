@@ -18,10 +18,15 @@ RUN npm install -g typescript pm2 ts-node
 
 
 # Compile TypeScript to JavaScript
-RUN npm run build
+RUN npm run build && npm run copy-protos
 
 # Expose the port the app runs on
 EXPOSE 27018
+EXPOSE 27019
+EXPOSE 27020
+EXPOSE 27021
+EXPOSE 27022
+EXPOSE 27023
 
 # Command to run the application
 CMD ["npm", "run", "start"]
