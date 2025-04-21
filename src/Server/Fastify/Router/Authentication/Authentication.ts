@@ -24,10 +24,7 @@ export default function userAuthentication(
   fastify.post("/login", async (request: any, reply: any) => {
     const userData = request.body;
 
-    const result = await Authentication.Login(
-      userData,
-      CentralAuthCollection,
-    );
+    const result = await Authentication.Login(userData, CentralAuthCollection);
     return reply.status(result.status ? 200 : 401).send(result);
   });
 }

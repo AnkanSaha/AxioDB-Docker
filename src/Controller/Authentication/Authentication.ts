@@ -1,7 +1,7 @@
 import Collection from "axiodb/lib/Operation/Collection/collection.operation";
 import { StatusCodes } from "outers";
 import bcrypt from "../../Helper/bcrypt.helper";
-import {ClassBased} from "outers";
+import { ClassBased } from "outers";
 import { CentralInformation } from "../../config/Keys";
 // Interfaces
 interface RegisterRequest {
@@ -18,7 +18,6 @@ interface LoginRequest {
 
 // Authentication Class to handle all the authentication related operations
 export default class Authentication {
-
   // Method to handle user registration management
   public static async Register(
     userData: RegisterRequest,
@@ -91,7 +90,10 @@ export default class Authentication {
   }
 
   // Method to handle user login management
-  public static async Login(userData: LoginRequest, CollectionInstance: Collection): Promise<any> {
+  public static async Login(
+    userData: LoginRequest,
+    CollectionInstance: Collection,
+  ): Promise<any> {
     try {
       // check if all fields are filled
       for (const key in userData) {
@@ -116,9 +118,11 @@ export default class Authentication {
         username: username,
       }).exec();
 
-      if (existingUser.statusCode === StatusCodes.OK &&
+      if (
+        existingUser.statusCode === StatusCodes.OK &&
         existingUser.status == true &&
-        existingUser.data.documents?.length === 0) {
+        existingUser.data.documents?.length === 0
+      ) {
         return {
           status: false,
           title: "User Not Found",
@@ -141,9 +145,11 @@ export default class Authentication {
       }
 
       // generate access token
-      const newAccessToken = new ClassBased.JWT_Manager(CentralInformation.CentralDB_JWT_Secret).generateLoginToken(existingUser.data.documents[0], 1, "24h");
+      const newAccessToken = new ClassBased.JWT_Manager(
+        CentralInformation.CentralDB_JWT_Secret,
+      ).generateLoginToken(existingUser.data.documents[0], 1, "24h");
 
-      if(newAccessToken.status === false) {
+      if (newAccessToken.status === false) {
         return {
           status: false,
           title: "Token Generation Failed",
@@ -163,8 +169,7 @@ export default class Authentication {
           currentTimeStamp: newAccessToken.currentTimeStamp,
         },
       };
-    }
-    catch (error) {
+    } catch (error) {
       console.error("Error in Login User", error);
       return {
         status: false,
