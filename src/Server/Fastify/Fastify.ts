@@ -8,6 +8,7 @@ import Database from "axiodb/lib/Operation/Database/database.operation";
 // Import all Routes
 import MainServiceRoutes from "./Router/Router";
 import fastifyRateLimit from "@fastify/rate-limit";
+import { StatusCodes } from "outers";
 
 // Interface
 interface ServerOptions {
@@ -48,11 +49,11 @@ const start = async (options?: ServerOptions) => {
     return { message: "Hello, from AxioDB Docker Container" };
   });
 
-  fastify.get("/health", async (_request: any, _reply: any) => {
-    return { status: "OK" };
-  });
-  fastify.get("/status", async (_request: any, _reply: any) => {
-    return { status: `Running on port ${PORT}` };
+  fastify.get("/status", async (_request: any, reply: any) => {
+    return reply.status(StatusCodes.OK).send({
+      status: "OK",
+      message: "AxioDB is running",
+    });
   });
 
   // Define a route to get the version information
