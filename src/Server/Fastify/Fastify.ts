@@ -7,6 +7,7 @@ import Database from "axiodb/lib/Operation/Database/database.operation";
 
 // Import all Routes
 import MainServiceRoutes from "./Router/Router";
+import fastifyRateLimit from "@fastify/rate-limit";
 
 // Interface
 interface ServerOptions {
@@ -23,6 +24,18 @@ const start = async (options?: ServerOptions) => {
   });
 
   const PORT: number = Number(ServerPorts.HTTP) || 27018;
+
+  await fastify.register(fastifyRateLimit, {
+    max: 100, // Max number of requests
+    timeWindow: '1 minute', // Time window for the max
+    errorResponseBuilder: function (req, context) {
+      return {
+        statusCode: 429,
+        error: 'Too Many Requests',
+        message: `You have reached the limit of ${context.max} requests in ${context.after}. Try again later.`,
+      };
+    }
+  });
 
   // Register routes with a prefix
   fastify.register(MainServiceRoutes, {
