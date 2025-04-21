@@ -19,4 +19,15 @@ export default function userAuthentication(
     );
     return reply.status(result.status ? 201 : 400).send(result);
   });
+
+  // Route to handle user login
+  fastify.post("/login", async (request: any, reply: any) => {
+    const userData = request.body;
+
+    const result = await Authentication.Login(
+      userData,
+      CentralAuthCollection,
+    );
+    return reply.status(result.status ? 200 : 401).send(result);
+  });
 }
