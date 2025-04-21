@@ -1,4 +1,3 @@
-import { SchemaTypes } from "axiodb";
 import generateSchema from "../util/SchemaGenerator.util";
 
 export enum ServerPorts {

@@ -10,12 +10,11 @@ COPY package*.json ./
 # Install dependencies
 RUN npm install
 
-# Copy the rest of the application source code
+# Copy the rest of the application source code from the current directory to the working directory in the container
 COPY . .
 
 # Install TypeScript and ts-node globally
 RUN npm install -g typescript ts-node
-
 
 # Compile TypeScript to JavaScript
 RUN npm run build && npm run copy-protos
@@ -29,4 +28,4 @@ EXPOSE 27022
 EXPOSE 27023
 
 # Command to run the application
-CMD ["npm", "run", "start"]
+ENTRYPOINT ["npm", "run", "start"]
