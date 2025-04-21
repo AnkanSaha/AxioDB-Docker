@@ -15,13 +15,14 @@ export const CentralDB_Auth_UserCollection_Schema = {
   username: ["required"],
   password: ["required"],
   AccessToken: ["optional"],
-}
+};
 
 export const CentralInformation = {
   CentralDB_InstanceName: "AxioDB_Central_Information",
   CentralDB_Name: "AxioDB_Central_DB",
   CentralDB_JWT_Secret: "AxioDB_Central_Secret",
   CentralDB_Collection_Auth: "AxioDB_Central_Collection_Auth",
-  CentralDB_Auth_UserCollection_Schema: generateSchema(CentralDB_Auth_UserCollection_Schema),
+  CentralDB_Auth_UserCollection_Schema: generateSchema(
+    CentralDB_Auth_UserCollection_Schema,
+  ),
 };
-
