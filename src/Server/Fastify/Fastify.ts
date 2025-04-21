@@ -31,7 +31,8 @@ const start = async (options?: ServerOptions) => {
     timeWindow: "1 minute", // Time window for the max
     errorResponseBuilder: function (req, context) {
       return {
-        statusCode: 429,
+        statusCode: StatusCodes.TOO_MANY_REQUESTS,
+        success: false,
         error: "Too Many Requests",
         message: `You have reached the limit of ${context.max} requests in ${context.after}. Try again later.`,
       };
