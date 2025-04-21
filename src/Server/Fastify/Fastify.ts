@@ -7,6 +7,8 @@ import Database from "axiodb/lib/Operation/Database/database.operation";
 
 // Import all Routes
 import MainServiceRoutes from "./Router/Router";
+import fastifyRateLimit from "@fastify/rate-limit";
+import { StatusCodes } from "outers";
 
 // Interface
 interface ServerOptions {
@@ -24,6 +26,19 @@ const start = async (options?: ServerOptions) => {
 
   const PORT: number = Number(ServerPorts.HTTP) || 27018;
 
+  await fastify.register(fastifyRateLimit, {
+    max: 100, // Max number of requests
+    timeWindow: "1 minute", // Time window for the max
+    errorResponseBuilder: function (req, context) {
+      return {
+        statusCode: StatusCodes.TOO_MANY_REQUESTS,
+        success: false,
+        error: "Too Many Requests",
+        message: `You have reached the limit of ${context.max} requests in ${context.after}. Try again later.`,
+      };
+    },
+  });
+
   // Register routes with a prefix
   fastify.register(MainServiceRoutes, {
     prefix: "/services",
@@ -35,11 +50,11 @@ const start = async (options?: ServerOptions) => {
     return { message: "Hello, from AxioDB Docker Container" };
   });
 
-  fastify.get("/health", async (_request: any, _reply: any) => {
-    return { status: "OK" };
-  });
-  fastify.get("/status", async (_request: any, _reply: any) => {
-    return { status: `Running on port ${PORT}` };
+  fastify.get("/status", async (_request: any, reply: any) => {
+    return reply.status(StatusCodes.OK).send({
+      status: "OK",
+      message: "AxioDB is running",
+    });
   });
 
   // Define a route to get the version information
