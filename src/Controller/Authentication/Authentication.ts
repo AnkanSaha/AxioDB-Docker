@@ -144,6 +144,12 @@ export default class Authentication {
         };
       }
 
+      // if AccessToken is already present, return it
+      if (existingUser.data.documents[0]?.AccessToken) {
+        delete existingUser.data.documents[0].password;
+        delete existingUser.data.documents[0].AccessToken;
+      }
+
       // generate access token
       const newAccessToken = new ClassBased.JWT_Manager(
         CentralInformation.CentralDB_JWT_Secret,
@@ -156,19 +162,32 @@ export default class Authentication {
           message: "Failed to generate access token",
         };
       }
-      // Return success message
-      return {
-        status: true,
-        statusCode: StatusCodes.OK,
-        title: "User Logged In Successfully",
-        message: "User has been logged in successfully",
-        data: {
-          username: existingUser.data.documents[0].username,
-          AccessToken: newAccessToken.toKen,
-          willExpireIn: "24h",
-          currentTimeStamp: newAccessToken.currentTimeStamp,
-        },
-      };
+
+      // Update in DB
+      const updateResponse = await CollectionInstance.update({ username: username }).UpdateOne({ AccessToken: newAccessToken.toKen });
+
+      if(updateResponse.status == true && updateResponse.statusCode == StatusCodes.OK) {
+        // Return success message
+        return {
+          status: true,
+          statusCode: StatusCodes.OK,
+          title: "User Logged In Successfully",
+          message: "User has been logged in successfully",
+          data: {
+            username: existingUser.data.documents[0].username,
+            AccessToken: newAccessToken.toKen,
+            willExpireIn: "24h",
+            currentTimeStamp: newAccessToken.currentTimeStamp,
+          },
+        };
+      }
+      else {
+        return {
+          status: false,
+          title: "Error in Updating Access Token",
+          message: "Error in Updating Access Token in the database",
+        };
+      }
     } catch (error) {
       console.error("Error in Login User", error);
       return {
