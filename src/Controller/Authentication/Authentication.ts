@@ -164,9 +164,14 @@ export default class Authentication {
       }
 
       // Update in DB
-      const updateResponse = await CollectionInstance.update({ username: username }).UpdateOne({ AccessToken: newAccessToken.toKen });
+      const updateResponse = await CollectionInstance.update({
+        username: username,
+      }).UpdateOne({ AccessToken: newAccessToken.toKen });
 
-      if(updateResponse.status == true && updateResponse.statusCode == StatusCodes.OK) {
+      if (
+        updateResponse.status == true &&
+        updateResponse.statusCode == StatusCodes.OK
+      ) {
         // Return success message
         return {
           status: true,
@@ -180,8 +185,7 @@ export default class Authentication {
             currentTimeStamp: newAccessToken.currentTimeStamp,
           },
         };
-      }
-      else {
+      } else {
         return {
           status: false,
           title: "Error in Updating Access Token",
