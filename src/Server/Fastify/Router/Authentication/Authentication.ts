@@ -7,7 +7,7 @@ import Collection from "axiodb/lib/Operation/Collection/collection.operation";
 // Method to handle user Authentication management
 export default function userAuthentication(
   fastify: FastifyInstance,
-  options: {CentralAuthCollection: Collection},
+  options: { CentralAuthCollection: Collection },
 ) {
   const { CentralAuthCollection } = options;
   // Route to handle user registration
