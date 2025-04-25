@@ -18,7 +18,7 @@ interface ServerOptions {
 }
 
 // Start the server
-const start = async (options?: ServerOptions) => {
+const start = async (options: ServerOptions) => {
   // Create a Fastify instance
   const fastify = Fastify({
     logger: true, // Enable logging
@@ -26,6 +26,8 @@ const start = async (options?: ServerOptions) => {
 
   const PORT: number = Number(ServerPorts.HTTP) || 27018;
 
+  // Register the rate limit plugin with custom error response
+  // This will limit the number of requests to 100 per minute
   await fastify.register(fastifyRateLimit, {
     max: 100, // Max number of requests
     timeWindow: "1 minute", // Time window for the max

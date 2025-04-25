@@ -2,11 +2,12 @@ import { FastifyInstance } from "fastify";
 
 // Import Controllers
 import Authentication from "../../../../Controller/Authentication/Authentication";
+import Collection from "axiodb/lib/Operation/Collection/collection.operation";
 
 // Method to handle user Authentication management
 export default function userAuthentication(
   fastify: FastifyInstance,
-  options: any,
+  options: { CentralAuthCollection: Collection },
 ) {
   const { CentralAuthCollection } = options;
   // Route to handle user registration
