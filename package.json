@@ -1,7 +1,7 @@
 {
   "name": "axiodb-docker",
-  "version": "1.4.11",
-  "Published": "25th April 2025",
+  "version": "1.4.13",
+  "Published": "28th April 2025",
   "description": "AxioDB Docker is designed to extend the capabilities of AxioDB, enabling seamless integration with other programming languages and systems via REST APIs, TCP connections, WebSocket, and more. This Docker image provides a scalable and efficient way to deploy AxioDB as a service.",
   "main": "docker.js",
   "scripts": {
@@ -29,6 +29,7 @@
   "author": "Ankan Saha",
   "license": "MIT",
   "dependencies": {
+    "@fastify/middie": "^9.0.3",
     "@fastify/rate-limit": "^10.2.2",
     "@grpc/grpc-js": "^1.13.3",
     "@grpc/proto-loader": "^0.7.13",
