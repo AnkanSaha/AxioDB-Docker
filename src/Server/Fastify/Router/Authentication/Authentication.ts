@@ -1,5 +1,5 @@
 import { FastifyInstance } from "fastify";
-
+ 
 // Import Controllers
 import Authentication from "../../../../Controller/Authentication/Authentication";
 import Collection from "axiodb/lib/Operation/Collection/collection.operation";
